@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NFluent;
 using NUnit.Framework;
 
 namespace WordWrap
@@ -17,13 +18,22 @@ namespace WordWrap
                 WordWrap.Wrap(string.Empty, 0);
             });
         }
+        [Test]
+        public void Should_return_the_input_when_column_number_is_equals_or_bigger_than_input_lenght()
+        {
+            var actual = WordWrap.Wrap("Small", 10);
+            Check.That(actual).IsEqualTo("Small");
+        }
     }
 
     internal class WordWrap
     {
-        internal static void Wrap(string input, int columNumber)
+        internal static string Wrap(string input, int columNumber)
         {
-            throw new ArgumentOutOfRangeException(nameof(columNumber));
+            if(columNumber < 1) throw new ArgumentOutOfRangeException(nameof(columNumber));
+            if (columNumber >= input.Length)
+                return input;
+            return input;
         }
     }
 }

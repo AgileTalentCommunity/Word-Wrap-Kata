@@ -30,7 +30,7 @@ namespace WordWrap
 
         [TestCase("word ", 4, "word\n")]
         [TestCase("word word", 4, "word\nword")]
-        public void Should_return_word_newline_when_input_is_word_space_and_column_number_is_4(string input, int columnNumber, string expected)
+        public void Should_return_space_replaced_by_newlines_when_the_column_numner_match_with_a_space_in_the_input(string input, int columnNumber, string expected)
         {
             var actual = WordWrap.Wrap(input, columnNumber);
             Check.That(actual).IsEqualTo(expected);

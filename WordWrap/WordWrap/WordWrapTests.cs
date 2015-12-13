@@ -38,6 +38,7 @@ namespace WordWrap
         }
        
         [TestCase("a bc", 3, "a\nbc")]
+        [TestCase("Like a word processor, break the line by replacing the last space in a line with a newline", 9, "Like a\nword\nprocessor\n, break\nthe line\nby\nreplacing\nthe last\nspace in\na line\nwith a\nnewline")]
         public void Should_avoid_breaking_line_in_middle_of_word_if_there_is_an_space(string input, int columnNumber, string expected)
         {
             var actual = WordWrap.Wrap(input, columnNumber);

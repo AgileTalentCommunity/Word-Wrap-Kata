@@ -30,6 +30,7 @@ namespace WordWrap
 
         [TestCase("word ", 4, "word\n")]
         [TestCase("word word", 4, "word\nword")]
+        [TestCase("abcd efgh ijkl", 4, "abcd\nefgh\nijkl")]
         public void Should_return_space_replaced_by_newlines_when_the_column_numner_match_with_a_space_in_the_input(string input, int columnNumber, string expected)
         {
             var actual = WordWrap.Wrap(input, columnNumber);

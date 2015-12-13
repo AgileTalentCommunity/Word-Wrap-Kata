@@ -28,41 +28,12 @@ namespace WordWrap
 
 
 
-        [Test]
-        public void Should_return_word_newline_when_input_is_word_space_and_column_number_is_4()
+        [TestCase("word ", 4, "word\n")]
+        [TestCase("word word", 4, "word\nword")]
+        public void Should_return_word_newline_when_input_is_word_space_and_column_number_is_4(string input, int columnNumber, string expected)
         {
-            var actual = WordWrap.Wrap("word ", 4);
-            Check.That(actual).IsEqualTo("word\n");
-        }
-
-        [Test]
-        public void Should_return_word_newline_word_when_input_is_wordword_and_column_number_is_4()
-        {
-            var actual = WordWrap.Wrap("word word", 4);
-            Check.That(actual).IsEqualTo("word\nword");
-        }
-    }
-
-    internal class WordWrap
-    {
-        internal static string Wrap(string input, int columnNumber)
-        {
-            if(columnNumber < 1) throw new ArgumentOutOfRangeException(nameof(columnNumber));
-            var line = string.Empty;
-            if (columnNumber >= input.Length)
-                return input;
-            var inputArray = input.ToCharArray();
-            for (int i = 0; i < inputArray.Length; i++)
-            {
-                if (i == columnNumber)
-                {
-                    if (inputArray[i] == ' ')
-                    {
-                        inputArray[i] = '\n';
-                    }
-                }
-            }
-            return new string(inputArray);            
+            var actual = WordWrap.Wrap(input, columnNumber);
+            Check.That(actual).IsEqualTo(expected);
         }
     }
 }

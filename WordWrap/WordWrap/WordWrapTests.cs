@@ -36,12 +36,19 @@ namespace WordWrap
             var actual = WordWrap.Wrap(input, columnNumber);
             Check.That(actual).IsEqualTo(expected);
         }
+       
+        [TestCase("a bc", 3, "a\nbc")]
+        public void Should_avoid_breaking_line_in_middle_of_word_if_there_is_an_space(string input, int columnNumber, string expected)
+        {
+            var actual = WordWrap.Wrap(input, columnNumber);
+            Check.That(actual).IsEqualTo(expected);
+        }
 
         [Test]
-        public void Should_return_a_newline_bc_when_input_is_a_space_bc_and_column_number_is_3()
+        public void Should_break_word_if_no_space_found()
         {
-            var actual = WordWrap.Wrap("a bc", 3);
-            Check.That(actual).IsEqualTo("a\nbc");
+            var actual = WordWrap.Wrap("abcd", 2);
+            Check.That(actual).IsEqualTo("ab\ncd");
         }
     }
 }

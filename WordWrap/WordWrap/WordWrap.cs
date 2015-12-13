@@ -28,7 +28,11 @@ namespace WordWrap
                         var spacePosition = inputArray.FindLastIndex(c => c == ' ');
                         inputArray[spacePosition] = '\n';
                         inputArray = inputArray.Take(spacePosition + 1).ToList();
-                        inputTreated = input.Substring(0,spacePosition + 1);
+                        inputTreated = input.Substring(0, spacePosition + 1);
+                    }
+                    else
+                    {
+                        inputArray[i] = '\n';
                     }
                 }
                 else

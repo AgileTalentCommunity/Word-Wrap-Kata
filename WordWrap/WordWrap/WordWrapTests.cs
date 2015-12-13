@@ -35,5 +35,12 @@ namespace WordWrap
             var actual = WordWrap.Wrap(input, columnNumber);
             Check.That(actual).IsEqualTo(expected);
         }
+
+        [Test]
+        public void Should_return_a_newline_bc_when_input_is_a_space_bc_and_column_number_is_3()
+        {
+            var actual = WordWrap.Wrap("a bc", 3);
+            Check.That(actual).IsEqualTo("a\nbc");
+        }
     }
 }

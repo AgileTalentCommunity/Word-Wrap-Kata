@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace WordWrap
 {
@@ -9,8 +10,8 @@ namespace WordWrap
             if(columnNumber < 1) throw new ArgumentOutOfRangeException(nameof(columnNumber));
             if (columnNumber >= input.Length)
                 return input;
-            var inputArray = input.ToCharArray();
-            for (int i = 0; i < inputArray.Length; i++)
+            var inputArray = input.ToList();
+            for (int i = 0; i < inputArray.Count; i++)
             {
                 if (i == columnNumber)
                 {
@@ -18,9 +19,15 @@ namespace WordWrap
                     {
                         inputArray[i] = '\n';
                     }
+                    else if(inputArray.Contains(' '))
+                    {
+                        var spacePosition = inputArray.FindLastIndex(c => c == ' ');
+                        inputArray[spacePosition] = '\n';
+
+                    }
                 }
             }
-            return new string(inputArray);            
+            return new string(inputArray.ToArray());            
         }
     }
 }
